@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC | Soluciones Digitales</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+<header>
+    <a class="btn-movil" href="movil.html">Ver versión celular</a>
+    <nav class="navbar">
+        <div class="logo">SC</div>
+<div class="hamburger" onclick="toggleMenu()" >
+☰
+</div>
+        <ul class="menu">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+
+    <div class="hero-text">
+        <h1>Soluciones Digitales</h1>
+        <p>Desarrollo web, automatización y herramientas para empresas.</p>
+
+        <button class="btn">Contactar</button>
+    </div>
+
+</section>
+
+
+<section id="servicios" class="servicios">
+
+<h2>Nuestros Servicios</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Desarrollo Web</h3>
+<p>Páginas modernas optimizadas para tu negocio.</p>
+</div>
+
+<div class="card">
+<h3>Automatización</h3>
+<p>Sistemas que ahorran tiempo y dinero.</p>
+</div>
+
+<div class="card">
+<h3>Software</h3>
+<p>Soluciones digitales a medida.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="nosotros" class="nosotros">
+
+<h2>Sobre Nosotros</h2>
+
+<p>
+Creamos herramientas digitales simples, eficientes y modernas para empresas
+y emprendedores.
+</p>
+
+</section>
+
+
+<section id="contacto" class="contacto">
+
+<h2>Contacto</h2>
+
+<form action="https://formspree.io/f/mkoqrzpl" method="POST">
+
+<input type="text" name="nombre" placeholder="Nombre">
+
+<input type="email" name="email" placeholder="Email">
+
+<textarea name="mensaje" placeholder="Mensaje"></textarea>
+
+<button type="submit">Enviar</button>
+
+</form>
+
+</section>
+
+
+<footer id="contacto">
+
+<div class="footer-grid">
+
+<div>
+
+<h4>Navegación</h4>
+
+<a href="../index.html">Inicio</a>
+<a href="../#proyectos">Proyectos</a>
+<a href="../menuQr.html">Cómo funciona</a>
+
+</div>
+
+
+<div>
+
+<h4>Proyectos</h4>
+
+<a href="../menuQr.html">Menú QR</a>
+<a href="../QR Generator/index.html">Generador QR</a>
+
+</div>
+
+
+<div>
+
+<h4>Contacto</h4>
+
+<a href="mailto:alex_sam951@hotmail.com.ar">Email</a>
+
+<a href="https://wa.me/5491164498340">
+WhatsApp
+</a>
+
+</div>
+
+
+<div>
+
+<h4>Sobre el sitio</h4>
+
+<p>
+Diseño páginas web simples y herramientas
+digitales para negocios.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="footer-info">
+
+<p>
+<span class="icon">📍</span>
+Buenos Aires, Argentina
+</p>
+
+<p>
+<span class="icon">💼</span>
+Disponible para proyectos freelance
+</p>
+
+<p>
+<span class="icon">💻</span>
+HTML · CSS · JavaScript
+</p>
+<div class="logo-footer">
+<img src="imagenes/logo2.png" >
+</div>
+</div>
+<p class="footer-copy">
+© 2026 - Portafolio
+</p>
+</footer>
+
+
+<script src="script.js"></script>
+
+<script>
+
+function toggleMenu(){
+
+let menu = document.getElementById("menu")
+
+menu.classList.toggle("active")
+
+}
+
+</script>
+</body>
+</html>

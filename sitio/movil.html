@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vista móvil</title>
+
+<link rel="stylesheet" href="mobile.css">
+
+</head>
+
+<body>
+<a class="btn-movil" href="index.html">Volver</a>
+<div class="phone">
+
+    <div class="screen">
+
+        <iframe src="indexmovil.html"></iframe>
+
+    </div>
+
+</div>
+<script>
+    const burger = document.querySelector(".hamburger")
+const menu = document.querySelector(".menu")
+
+burger.onclick = () => {
+
+menu.classList.toggle("active")
+
+}
+</script>
+
+</body>
+</html>

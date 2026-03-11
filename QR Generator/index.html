@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<title>Generador de QR</title>
+
+<style>
+.boton{
+
+display:inline-block;
+margin-top:25px;
+padding:12px 22px;
+background:#8b0000;
+color:white;
+text-decoration:none;
+border-radius:6px;
+
+}
+body{
+
+font-family:Arial, Helvetica, sans-serif;
+background:#f4f6f8;
+margin:0;
+padding:40px;
+
+}
+/* contenedor principal */
+
+.container{
+
+max-width:900px;
+margin:auto;
+
+}
+
+/* titulo */
+
+h1{
+
+text-align:center;
+margin-bottom:30px;
+color:#222;
+
+}
+/* panel */
+
+.panel{
+
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+justify-content:center;
+margin-bottom:35px;
+
+}
+.panel input{
+
+padding:10px;
+font-size:15px;
+border:1px solid #ccc;
+border-radius:6px;
+width:230px;
+
+}
+
+.panel input:focus{
+
+outline:none;
+border-color:#8b0000;
+
+}
+select{
+
+padding:10px;
+font-size:15px;
+border:1px solid #ccc;
+border-radius:6px;
+width:230px;
+
+}
+
+/* boton */
+
+.panel button{
+
+padding:11px 18px;
+background:#8b0000;
+color:white;
+border:none;
+border-radius:6px;
+font-size:15px;
+cursor:pointer;
+transition:0.2s;
+
+}
+
+.panel button:hover{
+
+background:#a50000;
+
+}
+
+#qrs{
+display:grid;
+grid-template-columns:repeat(auto-fill,440px);
+gap:25px;
+}
+
+.qrBox{
+background:white;
+padding:10px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 5px 5px rgba(0,0,0,0.2);
+transition:0.2s;
+}
+.qrBox:hover{
+
+transform:translateY(-4px);
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+
+}
+.qrBox img{
+
+margin-top:-90px;
+width:55px;
+background:white;
+padding:5px;
+border-radius:8px;
+
+}
+
+</style>
+
+</head>
+<body>
+    <a href="../index.html" class="boton">Volver</a>
+<h1>Generador de QR para Mesas</h1>
+
+<div class="panel">
+
+<input id="web" placeholder="https://tusitio.com/menu.html">
+
+<input id="mesas" type="number" placeholder="Cantidad de mesas">
+
+<button onclick="generar()">Generar</button>
+
+<button onclick="window.print()">Imprimir QR</button>
+<input type="file" id="logo" accept="image/png,image/jpeg">
+
+<select id="estilo">
+<option value="square">Cuadrado</option>
+<option value="rounded">Redondeado</option>
+<option value="dots">Puntos</option>
+<option value="classy">Elegante</option>
+<option value="classy-rounded">Elegante redondeado</option>
+</select>
+</div>
+
+<div id="qrs"></div>
+
+<script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+
+<script>
+
+function generar(){
+
+let web = document.getElementById("web").value
+let mesas = document.getElementById("mesas").value
+let contenedor = document.getElementById("qrs")
+
+
+contenedor.innerHTML=""
+
+for(let i=1;i<=mesas;i++){
+
+let caja = document.createElement("div")
+caja.className="qrBox"
+
+let titulo = document.createElement("h3")
+titulo.innerText="Mesa "+i
+
+let qrDiv = document.createElement("div")
+
+caja.appendChild(titulo)
+caja.appendChild(qrDiv)
+
+contenedor.appendChild(caja)
+
+let link = web + "?mesa=" + i
+
+let estilo = document.getElementById("estilo").value
+
+let archivoLogo = document.getElementById("logo").files[0]
+let logoURL = ""
+
+if(archivoLogo){
+logoURL = URL.createObjectURL(archivoLogo)
+}
+
+let qr = new QRCodeStyling({
+
+width:420,
+height:420,
+
+data:link,
+
+image:logoURL,
+
+dotsOptions:{
+color:"#000000",
+type:estilo
+},
+
+backgroundOptions:{
+color:"#ffffff"
+},
+
+imageOptions:{
+margin:5,
+imageSize:0.35
+}
+
+})
+
+
+qr.append(qrDiv)
+let texto = document.createElement("p")
+texto.innerText = link
+texto.style.fontSize = "12px"
+
+caja.appendChild(texto)
+}
+
+}
+
+
+
+</script>
+
+</body>
+</html>

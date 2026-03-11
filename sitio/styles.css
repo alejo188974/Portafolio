@@ -1,0 +1,343 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f7f7f7;
+color:#333;
+}
+
+/* NAVBAR */
+.btn-movil{
+
+display:inline-block;
+margin-top:25px;
+padding:12px 22px;
+background:#bb5501;
+color:white;
+text-decoration:none;
+border-radius:6px;
+
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 10%;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+color:#ff7a00;
+}
+
+.menu{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+.menu a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+}
+
+/* HERO */
+
+.hero{
+height:80vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(135deg,#ff7a00,#ff9d3f);
+color:white;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+margin-bottom:20px;
+}
+
+.btn{
+padding:12px 25px;
+border:none;
+background:white;
+color:#ff7a00;
+font-weight:bold;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* SERVICIOS */
+
+.servicios{
+padding:80px 10%;
+text-align:center;
+}
+
+.cards{
+display:flex;
+gap:30px;
+margin-top:40px;
+justify-content:center;
+}
+
+.card{
+background:white;
+padding:30px;
+width:250px;
+border-radius:8px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+/* NOSOTROS */
+
+.nosotros{
+padding:80px 10%;
+text-align:center;
+background:white;
+}
+
+/* CONTACTO */
+
+.contacto{
+padding:80px 10%;
+text-align:center;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:400px;
+margin:auto;
+}
+
+input,textarea{
+padding:12px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+button{
+padding:12px;
+border:none;
+background:#ff7a00;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+padding:30px;
+text-align:center;
+background:#222;
+color:white;
+margin-top:40px;
+}
+
+
+
+@media (max-width:768px){
+
+.menu{
+display:none;
+}
+
+.hamburger{
+display:block;
+cursor:pointer;
+}
+
+.cards{
+flex-direction:column;
+align-items:center;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.navbar{
+padding:15px 20px;
+}
+
+}
+
+
+
+.hamburger{
+display:none;
+font-size:28px;
+}
+
+.menu.active{
+display:flex;
+flex-direction:column;
+position:absolute;
+top:70px;
+right:20px;
+background:white;
+padding:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+
+/* footer */
+.logo-footer img{
+
+width:60px;
+height:auto;
+display:block;
+background-color: #fffefe;
+border-radius: 7px;
+}
+
+footer{
+
+background:#111;
+color:white;
+padding:50px 20px;
+
+}
+
+.footer-grid{
+
+max-width:1000px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:30px;
+
+}
+
+footer h4{
+
+margin-bottom:10px;
+
+}
+
+footer a{
+
+display:block;
+color:#ddd;
+text-decoration:none;
+margin-bottom:6px;
+
+}
+
+footer a:hover{
+
+color:white;
+
+}
+
+.footer-copy{
+
+text-align:center;
+margin-top:40px;
+opacity:0.6;
+
+}
+
+
+.footer-info{
+
+text-align:center;
+margin-top:30px;
+
+}
+
+.footer-info p{
+
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+margin:6px 0;
+opacity:0.85;
+
+}
+
+.icon{
+
+font-size:16px;
+
+}
+footer{
+
+background:#111;
+color:white;
+padding:60px 20px 30px 20px;
+
+}
+
+
+/* icono hamburguesa */
+
+.hamburger{
+
+display:none;
+font-size:28px;
+cursor:pointer;
+
+}
+
+/* responsive */
+
+@media (max-width:768px){
+
+.menu{
+
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:#111;
+flex-direction:column;
+align-items:center;
+display:none;
+padding:20px 0;
+
+}
+
+.menu li{
+
+margin:10px 0;
+
+}
+
+.menu.active{
+
+display:flex;
+
+}
+
+.hamburger{
+
+display:block;
+
+}
+
+}
