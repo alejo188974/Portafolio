@@ -5,137 +5,7 @@
 <meta charset="UTF-8">
 <title>Generador de QR</title>
 
-<style>
-.boton{
-
-display:inline-block;
-margin-top:25px;
-padding:12px 22px;
-background:#8b0000;
-color:white;
-text-decoration:none;
-border-radius:6px;
-
-}
-body{
-
-font-family:Arial, Helvetica, sans-serif;
-background:#f4f6f8;
-margin:0;
-padding:40px;
-
-}
-/* contenedor principal */
-
-.container{
-
-max-width:900px;
-margin:auto;
-
-}
-
-/* titulo */
-
-h1{
-
-text-align:center;
-margin-bottom:30px;
-color:#222;
-
-}
-/* panel */
-
-.panel{
-
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
-margin-bottom:35px;
-
-}
-.panel input{
-
-padding:10px;
-font-size:15px;
-border:1px solid #ccc;
-border-radius:6px;
-width:230px;
-
-}
-
-.panel input:focus{
-
-outline:none;
-border-color:#8b0000;
-
-}
-select{
-
-padding:10px;
-font-size:15px;
-border:1px solid #ccc;
-border-radius:6px;
-width:230px;
-
-}
-
-/* boton */
-
-.panel button{
-
-padding:11px 18px;
-background:#8b0000;
-color:white;
-border:none;
-border-radius:6px;
-font-size:15px;
-cursor:pointer;
-transition:0.2s;
-
-}
-
-.panel button:hover{
-
-background:#a50000;
-
-}
-
-#qrs{
-display:grid;
-grid-template-columns:repeat(auto-fill,440px);
-gap:25px;
-}
-
-.qrBox{
-background:white;
-padding:10px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 5px 5px rgba(0,0,0,0.2);
-transition:0.2s;
-}
-.qrBox:hover{
-
-transform:translateY(-4px);
-box-shadow:0 6px 15px rgba(0,0,0,0.2);
-
-}
-.qrBox img{
-
-margin-top:-90px;
-width:55px;
-background:white;
-padding:5px;
-border-radius:8px;
-
-}
-
-</style>
+<link rel="stylesheet" href="estilos.css">
 
 </head>
 <body>
@@ -153,25 +23,86 @@ border-radius:8px;
 <button onclick="window.print()">Imprimir QR</button>
 <input type="file" id="logo" accept="image/png,image/jpeg">
 
-<select id="estilo">
+Estilo: <select id="estilo">
 <option value="square">Cuadrado</option>
 <option value="rounded">Redondeado</option>
 <option value="dots">Puntos</option>
 <option value="classy">Elegante</option>
 <option value="classy-rounded">Elegante redondeado</option>
 </select>
+Ojos: <select id="ojos">
+<option value="square">Cuadrado</option>
+<option value="extra-rounded">Redondeado</option>
+<option value="dot">Punto</option>
+</select>
+Puntos: <select id="puntos">
+<option value="square">Cuadrado</option>
+<option value="dot">Punto</option>
+</select>
+Color 1<input type="color" id="color1" value="#000000">
+Color 2<input type="color" id="color2" value="#ff0000">
 </div>
+
 
 <div id="qrs"></div>
 
-<script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+<script src="js/qr-code-styling.js"></script>
 
 <script>
+
+
+// gradiente
+
+function generarQR(){
+
+const texto = document.getElementById("web").value || "https://tusitio.com/menu.html";
+const color1 = document.getElementById("color1").value;
+const color2 = document.getElementById("color2").value;
+
+const qr = new QRious({
+element: canvas,
+value: texto,
+size: 300,
+background: "#ffffff",
+foreground: color1
+});
+
+const ctx = canvas.getContext("2d");
+
+const gradient = ctx.createLinearGradient(0,0,300,300);
+gradient.addColorStop(0,color1);
+gradient.addColorStop(1,color2);
+
+ctx.fillStyle = gradient;
+
+const imageData = ctx.getImageData(0,0,300,300);
+
+for(let i=0;i<imageData.data.length;i+=4){
+
+if(
+imageData.data[i]===0 &&
+imageData.data[i+1]===0 &&
+imageData.data[i+2]===0
+){
+ctx.fillRect(
+(i/4)%300,
+Math.floor((i/4)/300),
+1,
+1
+);
+}
+
+}
+}
+
+
+// Generacion de QRCodeStyling
+
 
 function generar(){
 
 let web = document.getElementById("web").value
-let mesas = document.getElementById("mesas").value
+let mesas = parseInt(document.getElementById("mesas").value)
 let contenedor = document.getElementById("qrs")
 
 
@@ -213,13 +144,27 @@ data:link,
 image:logoURL,
 
 dotsOptions:{
-color:"#000000",
-type:estilo
+type:estilo,
+gradient:{
+type:"linear",
+rotation:0,
+colorStops:[
+{offset:0,color:document.getElementById("color1").value},
+{offset:1,color:document.getElementById("color2").value}
+]
+}
 },
 
 backgroundOptions:{
 color:"#ffffff"
 },
+cornersSquareOptions:{
+type:document.getElementById("ojos").value
+},
+cornersDotOptions:{
+type:document.getElementById("puntos").value
+},
+
 
 imageOptions:{
 margin:5,
@@ -238,8 +183,14 @@ caja.appendChild(texto)
 }
 
 }
-
-
+document.getElementById("color1").addEventListener("input", generar)
+document.getElementById("color2").addEventListener("input", generar)
+document.getElementById("estilo").addEventListener("change", generar)
+document.getElementById("logo").addEventListener("change", generar)
+document.getElementById("web").addEventListener("input", generar)
+document.getElementById("mesas").addEventListener("input", generar)
+document.getElementById("ojos").addEventListener("change", generar)
+document.getElementById("puntos").addEventListener("change", generar)
 
 </script>
 
